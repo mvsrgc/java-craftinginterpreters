@@ -67,12 +67,57 @@ class Scanner {
             case '*':
                 addToken(STAR);
                 break;
+            case '!': // For these cases, view the comments for advance() function
+                addToken(match('=') ? BANG_EQUAL : BANG);
+                break;
+            case '=':
+                addToken(match('=') ? EQUAL_EQUAL : EQUAL);
+                break;
+            case '<':
+                addToken(match('=') ? LESS_EQUAL : LESS);
+                break;
+            case '>':
+                addToken(match('=') ? GREATER_EQUAL : GREATER);
+                break;
+            case '/':
+                if (match('/')) {
+                while (peek() != '\n' && !isAtEnd()) advance();
+            }
+            case ' ':
+            case '\r':
+            case '\t':
+                break;
+            case '\n':
+                line++;
+                break;
             default:
                 Lox.error(line, "Unexpected character.");
                 break;
         }
     }
 
+    private char peek() {
+        if (isAtEnd()) return '\0';
+        return source.charAt(current);
+    }
+
+    private boolean match(char expected) {
+        if (isAtEnd())  {
+            return false;
+        }
+
+        if (source.charAt(current) != expected) {
+            return false;
+        }
+
+        current++;
+
+        return true;
+    }
+
+    // Here we return the current character, and THEN we
+    // increment current, so by the time we read the character
+    // the current variable is already on the following character.
     private char advance() {
         return source.charAt(current++);
     }
