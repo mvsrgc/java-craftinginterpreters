@@ -79,7 +79,8 @@ class Scanner {
                 break;
             case '/':
                 if (match('/')) {
-                    while (peek() != '\n' && !isAtEnd()) advance();
+                    while (peek() != '\n' && !isAtEnd())
+                        advance();
                 } else {
                     addToken(SLASH);
                 }
@@ -91,7 +92,9 @@ class Scanner {
             case '\n':
                 line++;
                 break;
-            case '"': string(); break;
+            case '"':
+                string();
+                break;
             default:
                 if (isDigit(c)) {
                     number();
@@ -103,30 +106,34 @@ class Scanner {
     }
 
     private void number() {
-        while (isDigit(peek())) advance();
+        while (isDigit(peek()))
+            advance();
 
         if (peek() == '.' && isDigit(peekNext())) {
             advance(); // consume '.'
 
-            while (isDigit(peek())) advance();
+            while (isDigit(peek()))
+                advance();
         }
 
         Double value = Double.parseDouble(source.substring(start, current));
         addToken(NUMBER, value);
-	}
+    }
 
-	private char peekNext() {
-        if (current + 1 >= source.length()) return '\0';
-		return source.charAt(current + 1);
-	}
+    private char peekNext() {
+        if (current + 1 >= source.length())
+            return '\0';
+        return source.charAt(current + 1);
+    }
 
-	private boolean isDigit(char c) {
-		return c >= '0' && c <= '9';
-	}
+    private boolean isDigit(char c) {
+        return c >= '0' && c <= '9';
+    }
 
-	private void string() {
+    private void string() {
         while (peek() != '"' && !isAtEnd()) {
-            if (peek() == '\n') line++;
+            if (peek() == '\n')
+                line++;
             advance();
         }
 
@@ -143,12 +150,13 @@ class Scanner {
     }
 
     private char peek() {
-        if (isAtEnd()) return '\0';
+        if (isAtEnd())
+            return '\0';
         return source.charAt(current);
     }
 
     private boolean match(char expected) {
-        if (isAtEnd())  {
+        if (isAtEnd()) {
             return false;
         }
 
