@@ -101,9 +101,14 @@ class Scanner {
                 addToken(match('=') ? GREATER_EQUAL : GREATER);
                 break;
             case '/':
-                if (match('/')) {
+                if (match('/')) { // Inline comment
                     while (peek() != '\n' && !isAtEnd())
                         advance();
+                } else if (match('*')) { // Block comment
+                    while (peek() != '/' && !isAtEnd()) {
+                        advance();
+                    }
+                    advance(); // Consume the slash
                 } else {
                     addToken(SLASH);
                 }

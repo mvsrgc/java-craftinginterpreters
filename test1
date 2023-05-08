@@ -6,3 +6,7 @@
 123.4
 my_variable
 print("This is a string to print!")
+
+/* This is a
+multiline block comment,
+implemented for the challenge. */
