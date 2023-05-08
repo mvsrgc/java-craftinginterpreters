@@ -4,3 +4,5 @@
 !*+-/=<> <= == // operators
 123
 123.4
+my_variable
+print("This is a string to print!")
