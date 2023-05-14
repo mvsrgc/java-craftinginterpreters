@@ -108,6 +108,12 @@ class Scanner {
                     while (peek() != '/' && !isAtEnd()) {
                         advance();
                     }
+
+                    if (isAtEnd()) {
+                        Lox.error(line, "Unterminated block comment.");
+                        return;
+                    }
+
                     advance(); // Consume the slash
                 } else {
                     addToken(SLASH);
