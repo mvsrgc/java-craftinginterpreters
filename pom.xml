@@ -35,7 +35,7 @@
                         <configuration>
                             <mainClass>com.craftinginterpreters.tool.GenerateAst</mainClass>
                             <arguments>
-                                <argument>test</argument>
+                                <argument>src/main/java/com/craftinginterpreters/lox</argument>
                             </arguments>
                         </configuration>
                     </execution>
